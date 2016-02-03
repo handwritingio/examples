@@ -1,5 +1,2 @@
 pdfrw==0.2
-Pillow==3.0.0
-reportlab==3.2.0
 requests==2.8.1
-wheel==0.24.0
