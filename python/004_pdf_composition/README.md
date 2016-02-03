@@ -16,5 +16,6 @@ To run this example:
   this can easily be installed via homebrew on OSX or most package
   managers on Linux distros
   - edit the `render_and_compose.py` script to change variables
+  (your API credentials, handwriting style, size, color, etc...)
   - run `python ./render_and_compose.py`
   - open out.png

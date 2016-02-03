@@ -12,8 +12,9 @@ import pypb
 import requests
 from pdfrw import PdfReader, PdfWriter, PageMerge
 
-API_TOKEN = "ARMGYAP2S4MYA6WC"
-API_SECRET = "SR3VNCE7F5BDJ22A"
+# Get your tokens at https://handwriting.io/account/tokens
+API_TOKEN = "YOUR_TOKEN"
+API_SECRET = "YOUR_SECRET"
 
 # 72 points == 1 inch
 CARD_W_POINTS = 7 * 72
