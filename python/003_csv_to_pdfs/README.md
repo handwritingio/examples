@@ -1,4 +1,4 @@
-Example 1
+Example 3
 ===============
 
 This example demonstrates reading a CSV file, and generating a
