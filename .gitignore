@@ -41,3 +41,4 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+out.pdf
