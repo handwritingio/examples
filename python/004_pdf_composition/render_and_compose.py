@@ -1,14 +1,7 @@
 #!/usr/bin/env python
-import csv
-import multiprocessing
-import pprint
-import random
 import subprocess
-import sys
 import tempfile
-from collections import Counter
 
-import pypb
 import requests
 from pdfrw import PdfReader, PdfWriter, PageMerge
 
