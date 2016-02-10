@@ -4,7 +4,8 @@ Example 4: PDF Compositing
 The example covers the use case of having pre-existing stationary, and wanting
 to render handwriting on top of it for printing.
 
-This example requires the `pdfrw` libraries to work. Install this via pip.
+This example requires the `pdfrw` and `requests` libraries to work. Install
+these via pip.
 
 We start with a run of the mill template, a 5x7" card with a company logo
 
