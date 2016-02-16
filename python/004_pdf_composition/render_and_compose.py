@@ -65,9 +65,10 @@ def make_card():
 
   # set up our render as a "stamp" to put on the template
   stamp = PageMerge().add(message_pdf.pages[0])[0]
-  # move the render to the right spot on the card (offset is from bottom left)
+  # x is the distance from the left edge of the template to the left edge of the stamp:
   stamp.x = OFFSET_X_POINTS
-  stamp.y = OFFSET_Y_POINTS
+  # y is the distance from the bottom edge of the template to the top edge of the stamp:
+  stamp.y = CARD_H_POINTS - OFFSET_Y_POINTS
   pm = PageMerge(template_pdf.pages[0])
   pm.add(stamp)
   pm.render()
