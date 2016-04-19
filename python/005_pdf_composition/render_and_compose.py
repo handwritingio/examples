@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-from subprocess import Popen, PIPE
 
-import requests
+import handwritingio
 from pdfrw import PdfReader, PdfWriter, PageMerge
 
 # Get your tokens at https://handwriting.io/account/tokens
@@ -13,7 +12,7 @@ CARD_W_POINTS = 7 * 72
 CARD_H_POINTS = 5 * 72
 OFFSET_X_POINTS = 72
 OFFSET_Y_POINTS = 1.25 * 72
-HANDWRITING_ID ="5WGWVXQG00WM"
+HANDWRITING_ID = "5WGWVXQG00WM"
 
 MESSAGE_TO_RENDER = """Hi Dave!
 
@@ -23,22 +22,12 @@ Sincerely,
     Cynthia "Bold Moves" Smith
 """
 
-
-def render_api(params):
-  """This call renders a PDF according to the passed in params dict,
-  returning the PDF file data upon success.
-  """
-  r = requests.get("https://api.handwriting.io/render/pdf",
-      auth=(API_TOKEN, API_SECRET),
-      params=params,
-    )
-  r.raise_for_status()
-  return r.content
+CLIENT = handwritingio.Client(API_TOKEN, API_SECRET)
 
 
 def render_handwritten_msg(hw_id, msg):
-  """Render a given messages (msg) in a handwriting_id
-  other params are hard coded for brevity
+  """Render a given message (msg) in a handwriting_id other params are hard
+  coded for brevity.
   """
   params = {
     'text': msg,
@@ -49,7 +38,7 @@ def render_handwritten_msg(hw_id, msg):
     'width': '%spt' % (CARD_W_POINTS - 2 * OFFSET_X_POINTS),
     'height': '%spt' % (CARD_H_POINTS - 2 * OFFSET_Y_POINTS),
   }
-  return render_api(params)
+  return CLIENT.render_pdf(params)
 
 
 def make_card():
@@ -74,6 +63,7 @@ def make_card():
   pm.render()
 
   PdfWriter().write('out.pdf', template_pdf)
+
 
 if __name__ == "__main__":
   make_card()

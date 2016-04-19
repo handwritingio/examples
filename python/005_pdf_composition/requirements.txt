@@ -1,0 +1,2 @@
+pdfrw==0.2
+handwritingio>=1.0,<1.1

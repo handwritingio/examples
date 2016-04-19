@@ -5,7 +5,7 @@ import csv
 import logging
 import os
 
-import requests
+import handwritingio
 
 API_TOKEN = "<YOUR TOKEN>"
 API_SECRET = "<YOUR SECRET>"
@@ -37,21 +37,15 @@ def render_pdf(msg, outfile):
   successful downloads to the path `outfile`
   """
   log.debug("rendering to %s", outfile)
-  r = requests.get("https://api.handwriting.io/render/pdf",
-      auth=(API_TOKEN, API_SECRET),
-      params={
-        'text': msg,
-        'handwriting_id': args.handwriting_id,
-        'handwriting_size': '14pt',
-        'height': 'auto',
-        'width': '3in'
-      },
-      stream=True # to prevent in-memory buffering of the image
-    )
-  r.raise_for_status()
+  pdf = client.render_pdf({
+    'text': msg,
+    'handwriting_id': args.handwriting_id,
+    'handwriting_size': '14pt',
+    'height': 'auto',
+    'width': '3in'
+  })
   with open(outfile, 'wb') as f:
-    for chunk in r.iter_content(chunk_size=4096):
-      f.write(chunk)
+    f.write(pdf)
 
 
 def process_csv(filename, output_dir):
@@ -68,7 +62,7 @@ def process_csv(filename, output_dir):
       outfile = os.path.join(args.output_dir, "%04d.pdf" % idx)
       try:
         render_pdf(msg, outfile)
-      except requests.exceptions.RequestException as e:
+      except handwritingio.APIError as e:
         log.error("Could not render row %04d: %s", idx, e)
 
 
@@ -98,9 +92,8 @@ if __name__ == "__main__":
   logging.basicConfig(level=level)
   log = logging.getLogger(__name__)
 
-  # tell the requests library to shut up
-  requests_logger = logging.getLogger('requests')
-  requests_logger.setLevel(logging.WARN)
+  # create a client that we will reuse for each render
+  client = handwritingio.Client(API_TOKEN, API_SECRET)
 
   # iterate over all passed in files
   for f in args.inputs:

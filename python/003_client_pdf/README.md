@@ -1,13 +1,13 @@
-Example 2: Using the Requests Library
-========================================
+Example 3: Using the Handwriting.io Client
+===============================================
 
 This example demonstrates very simple API access to render a PDF of a message.
 It requires a valid API token pair, which can be created for free at
 https://handwriting.io.
 
-The only difference between this example and the first one is that this one uses
-the popular `requests` library. Installation info can be found at
-http://docs.python-requests.org/en/latest/
+While the previous examples used the `requests` library to call the API, this
+example uses our official Python client:
+https://github.com/handwritingio/python-client
 
 After you have your token pair simply find the following two lines in
 `render_pdf.py`

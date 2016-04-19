@@ -3,14 +3,7 @@
 (out.pdf) in the working directory
 """
 
-import sys
-
-try:
-  import requests
-except ImportError:
-  print "This script requires the requests library which can be downloaded at "\
-    "http://docs.python-requests.org/en/latest/"
-  sys.exit(1)
+import requests
 
 BASE_URL = "https://api.handwriting.io"
 API_TOKEN = "<YOUR TOKEN>"
